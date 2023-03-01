@@ -14,5 +14,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('posts');
+});
+
+Route::get('posts/{post}', function ($slug) {
+    // get post path
+    $post_path = __DIR__ . "/../resources/posts/{$slug}.html";
+
+    // if file doesn't exist, debug
+    if (! file_exists($post_path)) {
+        return redirect("/");
+    }
+
+    $post = file_get_contents($post_path);
+
+    return view('post', [
+        'post' => $post
+    ]);
 });
