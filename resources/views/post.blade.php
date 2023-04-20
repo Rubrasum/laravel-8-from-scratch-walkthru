@@ -11,7 +11,7 @@
             </a>
         </h1>
         <div>
-            {{$post->body}}...
+            {!! $post->body !!}...
         </div>
     </article>
     <a href="/">Go Back</a>
