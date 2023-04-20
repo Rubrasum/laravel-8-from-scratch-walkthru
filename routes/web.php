@@ -17,20 +17,20 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 Route::get('/', function () {
     $files = File::files(resource_path("posts")); //get all post filepaths
-    $posts = [];
 
-    $posts = array_map( function ($file) {
-        $document = YamlFrontMatter::parseFile($file); // parse the files in an object using yamlfrontmatter
+    $posts = collect($files)
+        ->map(function () {
+            $document = YamlFrontMatter::parseFile($file); // parse the files in an object using yamlfrontmatter
 
-        // create posts
-        $posts[] = new Post(
-            $document->title,
-            $document->excerpt,
-            $document->date,
-            $document->body(),
-            $document->slug
-        );
-    }, $files);
+            // create posts
+            return new Post(
+                $document->title,
+                $document->excerpt,
+                $document->date,
+                $document->body(),
+                $document->slug
+            );
+        });
 
     return view('posts', [
         'posts' => $posts
