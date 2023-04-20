@@ -1,9 +1,6 @@
-<!doctype html>
+@extends('layout')
 
-<title>My Portfolio Site!</title>
-<link rel="stylesheet" href="/app.css">
-
-<body>
+@section('content')
     @foreach ($posts as $post)
         <article>
             <h1>
@@ -16,4 +13,4 @@
             </div>
         </article>
     @endforeach
-</body>
+@endsection

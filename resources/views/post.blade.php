@@ -1,9 +1,6 @@
-<!doctype html>
+@extends('layout')
 
-<title>My Portfolio Site!</title>
-<link rel="stylesheet" href="/app.css">
-
-<body>
+@section('content')
     <article>
         <h1>
             <a href="/posts/{{$post->slug}}">
@@ -15,4 +12,4 @@
         </div>
     </article>
     <a href="/">Go Back</a>
-</body>
+@endsection
