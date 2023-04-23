@@ -8,6 +8,11 @@
                     {{ $post->title }}
                 </a>
             </h2>
+
+            <p>
+                <a href="#">{{ $post->category->name }}</a>
+            </p>
+
             <div>
                 {{ $post->excerpt }}...
             </div>

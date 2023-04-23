@@ -12,4 +12,8 @@ class Post extends Model
 //    protected $fillable = ['title', 'excerpt', 'body']; // allows only these explicit fields to be mass assigned
 //    protected $guarded = ['id']; // disables these fields from being mass assigned
     protected $guarded = []; // allows all mass assigned but can be used to
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
 }
