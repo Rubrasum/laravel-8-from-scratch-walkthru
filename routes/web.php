@@ -33,13 +33,13 @@ Route::get('posts/{post:slug}', function (Post $post) { // Post::where('slug', $
 Route::get('categories/{category:slug}', function (Category $category) { // Post::where('slug', $post)->firstOrFail();
 
     return view('posts', [
-        'posts' => $category->posts->load(['category','author'])
+        'posts' => $category->posts
     ]);
 });
 
 Route::get('authors/{author:username}', function (User $author) { // Post::where('slug', $post)->firstOrFail();
 
     return view('posts', [
-        'posts' => $author->posts->load(['category','author'])
+        'posts' => $author->posts
     ]);
 });
