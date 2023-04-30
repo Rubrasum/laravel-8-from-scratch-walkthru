@@ -23,7 +23,7 @@ Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 
 Route::get('authors/{author:username}', function (User $author) { // Post::where('slug', $post)->firstOrFail();
-    return view('posts', [
+    return view('posts.index', [
         'posts' => $author->posts
     ]);
 });
