@@ -1,6 +1,5 @@
 <?php
-
-use App\Http\Controllers\PostController;
+// author Joe Betbeze
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
