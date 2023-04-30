@@ -15,6 +15,19 @@ class Post extends Model
 
     protected $with = ['category', 'author']; // prevents n+1 problem.
 
+    public function scopeFilter($query, array $filters) {
+
+        $query->when($filters['search'] ?? false, fn($query, $search) =>
+            $query
+                ->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('body', 'like', '%' . request('search') . '%'));
+        $query->when($filters['category'] ?? false, fn($query, $category) =>
+            $query->whereHas('category', fn ($query) =>
+                $query->where('slug', $category)
+            )
+        );
+    }
+
     public function category() {
         return $this->belongsTo(Category::class);
     }
@@ -23,11 +36,5 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function scopeFilter($query, array $filters) {
 
-        $query->when($filters['search'] ?? false, fn($query, $search) =>
-            $query
-                ->where('title', 'like', '%' . request('search') . '%')
-                ->orWhere('body', 'like', '%' . request('search') . '%'));
-    }
 }
