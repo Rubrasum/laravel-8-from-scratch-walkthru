@@ -13,7 +13,21 @@ class Post extends Model
 //    protected $guarded = ['id']; // disables these fields from being mass assigned
     protected $guarded = []; // allows all mass assigned but can be used to
 
+    protected $with = ['category', 'author']; // prevents n+1 problem.
+
     public function category() {
         return $this->belongsTo(Category::class);
+    }
+
+    public function author() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function scopeFilter($query, array $filters) {
+
+        $query->when($filters['search'] ?? false, fn($query, $search) =>
+            $query
+                ->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('body', 'like', '%' . request('search') . '%'));
     }
 }
