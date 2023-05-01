@@ -7,6 +7,7 @@
             <h1 class="text-center font-bold text-xl">Register</h1>
 
             <form method="Post" action="/register" class="mt-10">
+                @csrf
                 <div class="mb-6">
                     <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
                            for="name"
@@ -35,6 +36,24 @@
                            id="username"
                            required
                     >
+                </div>
+                <div class="mb-6">
+                    <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                           for="email"
+                    >
+                        Email
+                    </label>
+
+                    <input class="border border-gray-400 p-2 w-full"
+                           type="email"
+                           name="email"
+                           id="email"
+                           required
+                    >
+
+                    @error('')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="mb-6">
                     <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
