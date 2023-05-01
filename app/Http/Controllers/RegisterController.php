@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -22,7 +23,5 @@ class RegisterController extends Controller
         // Use eloquent mutator in User Model
 
         User::create($attributes);
-
-
     }
 }
