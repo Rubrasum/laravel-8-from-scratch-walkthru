@@ -22,11 +22,11 @@ class RegisterController extends Controller
         ]);
 
         // Use eloquent mutator in User Model
+        $user = User::create($attributes);
 
-        User::create($attributes);
-        // flash adds this to session for one page load
-//        session()->flash('success', 'Your account has been created.');
-        // But instead you can use with() on the redirect
-        redirect('/')->with('success', 'Your account has been created.');
+        //log in the user
+        auth()->login($user);
+
+        return redirect('/')->with('success', 'Your account has been created.');
     }
 }
