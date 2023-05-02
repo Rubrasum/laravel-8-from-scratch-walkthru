@@ -20,19 +20,26 @@ class SessionsController extends Controller
     // Attempt to authenticate and log in the user
     // based on the provided credentials
     public function store() {
+
         $attributes = request()->validate([
             'email' => ['required','email'],
             'password' => 'required'
         ]);
-
-        // signs you in and checks
-        if (auth()->attempt($attributes)) {
-            return redirect('/')->with('success', 'Welcome Back!'); // redirect, success flash
+        // Check validation
+        if (! auth()->attempt($attributes)) {
+            // auth failed.
+            throw ValidationException::withMessages([
+                'email' => 'Your provided credentials could not be verified'
+            ]);
         }
 
-        // auth failed.
-        throw ValidationException::withMessages([
-            'email' => 'Your provided credentials could not be verified'
-        ]);
+        return redirect('/')->with('success', 'Welcome Back!'); // redirect, success flash
     }
 }
+
+/**
+ * Laravel Breeze vs Laravel Jetstream
+ *
+ * Breeze: If you're doing breeze you wanna do it right away at the start of the project, refer to #51.
+ *
+ */
