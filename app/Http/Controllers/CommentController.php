@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    //
+    // 7 Restful actions: index, show, create, store, edit, update, destroy
     public function store() {
 
         $attributes = request()->validate([

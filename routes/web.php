@@ -7,7 +7,9 @@ use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
+
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
+Route::post('post/{post:slug}/comments', [CommentController::class, 'store'])->middleware('auth');
 
 // middleware runs on every request, guest says only non-user can sign in
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
@@ -17,6 +19,5 @@ Route::get('login', [SessionsController::class, 'create'])->middleware('guest');
 Route::post('sessions', [SessionsController::class, 'store'])->middleware('guest');
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
-Route::post('post', [CommentController::class, 'store'])->middleware('auth');
 
 
