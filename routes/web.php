@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
-Route::post('post/{post:slug}/comments', [CommentController::class, 'store'])->middleware('auth');
+Route::post('posts/{post:slug}/comments', [CommentController::class, 'store'])->middleware('auth');
 
 // middleware runs on every request, guest says only non-user can sign in
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
