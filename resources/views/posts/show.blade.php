@@ -54,7 +54,7 @@
                 </div>
 
                 <section class="col-span-8 col-start-5 mt-10 space-y-6">
-                    <form method="POST" action="#" class="border border-gray-200 p-6 rounded-xl">
+                    <form method="POST" action="/" class="border border-gray-200 p-6 rounded-xl">
                         @csrf
 
                         <header class="flex items-center">
