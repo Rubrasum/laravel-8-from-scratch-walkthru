@@ -22,18 +22,20 @@ class SessionsController extends Controller
     public function store() {
 
         $attributes = request()->validate([
-            'email' => ['required','email'],
+            'username' => ['required'],
             'password' => 'required'
         ]);
         // Check validation
         if (! auth()->attempt($attributes)) {
             // auth failed.
             throw ValidationException::withMessages([
-                'email' => 'Your provided credentials could not be verified'
+                'username' => 'Your provided credentials could not be verified'
             ]);
-        }
+        } else {
+            session()->regenerate();
 
-        return redirect('/')->with('success', 'Welcome Back!'); // redirect, success flash
+            return redirect('/')->with('success', 'Welcome Back!'); // redirect, success flash
+        }
     }
 }
 
