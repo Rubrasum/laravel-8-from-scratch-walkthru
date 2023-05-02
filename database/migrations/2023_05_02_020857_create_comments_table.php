@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('post_id')->constrained()->cascadeOnDelete();
+            $table->text('body');
             $table->timestamps();
+
+            // These are replaced by the foreinID things above
+//            $table->unsignedBigInteger('post_id'); // Foreign keys need to match, and this matches the base id()
+//            $table->foreign('post_id')->references('id')->on('posts')->cascadeOnDelete();
         });
     }
 
