@@ -7,24 +7,33 @@ use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
 use MailchimpMarketing\ApiClient;
 
-Route::get('ping', function() {
+Route::post('newsletter', function() {
 
     $mailchimp = new ApiClient();
 
     $mailchimp->setConfig([
-        'apiKey' => env('MAILCHIMP_KEY'),
-        'server' => env('MAILCHIMP_PREFIX')
+        'apiKey' => config('services.mailchimp.key'),
+        'server' => config('services.mailchimp.prefix')
     ]);
 
-    $response = $mailchimp->lists->addListMember('21bdd73e63', [
-        'email_address' => 'josephbetbeze@gmail.com',
-        'status' => 'subscribed'
-    ]);
-    ddd($response);
+    try {
+        $response = $mailchimp->lists->addListMember('21bdd73e63', [
+            'email_address' => request('email'),
+            'status' => 'subscribed'
+        ]);
+    } catch (\Exception $e) {
+        throw \Illuminate\Validation\ValidationException::withMessages([
+            'email' => 'This email could not be added to our newsletter list.'
+        ]);
+    }
+
+
+
+    return redirect('/')
+        ->with('success', 'You are now signed up for our newsletter!');
 });
 
 Route::get('/', [PostController::class, 'index'])->name('home');
-
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 Route::post('posts/{post:slug}/comments', [CommentController::class, 'store'])->middleware('auth');
 
