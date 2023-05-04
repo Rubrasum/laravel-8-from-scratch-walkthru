@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
@@ -20,5 +20,9 @@ class PostController extends Controller
             'post' => $post,
             'categories' => Category::all()
         ]);
+    }
+
+    public function create() {
+        return view('posts.create');
     }
 }
