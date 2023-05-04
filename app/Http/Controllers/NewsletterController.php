@@ -8,6 +8,7 @@ use Illuminate\Validation\ValidationException;
 
 class NewsletterController extends Controller
 {
+    // checkout episode 61 to Laravel from scratch to deal with this in a more modular way
     public function __invoke(Newsletter $newsletter) {
 
         request()->validate(['email'], ['required', 'email']);
