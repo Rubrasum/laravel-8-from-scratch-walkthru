@@ -29,20 +29,20 @@ class PostController extends Controller
 
     public function store() {
 
-        request()->validate([
+        $attributes = request()->validate([
             'title' => 'required',
-            'slug' => ['required', Rule::exists('posts', 'slug')],
+            'slug' => ['required', Rule::unique('posts', 'slug')],
             'excerpt' => 'required',
             'body' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id')],
-            'user_id' => auth()->id()
+            'category_id' => ['required', Rule::exists('categories', 'id')]
         ]);
 
-        $attributes['user_id'] =
+        $attributes['user_id'] = auth()->id();
 
-        Post::create([
+        Post::create($attributes);
 
-        ])
+        return redirect('/');
+
 
     }
 }
