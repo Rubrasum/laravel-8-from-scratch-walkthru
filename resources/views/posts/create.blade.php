@@ -16,6 +16,7 @@
                             type="text"
                             name="title"
                             id="title"
+                            value="{{ old('title') }}"
                             required
                     >
 
@@ -32,10 +33,11 @@
                     </label>
 
                     <input  class="border border-gray-400 p-2 w-full"
-                               name="slug"
-                               id="slug"
-                               type="text"
-                               required
+                            name="slug"
+                            id="slug"
+                            type="text"
+                            value="{{ old('slug') }}"
+                            required
                     />
 
                     @error('slug')
@@ -51,10 +53,10 @@
                     </label>
 
                     <textarea  class="border border-gray-400 p-2 w-full"
-                             name="excerpt"
-                             id="excerpt"
-                             required
-                    ></textarea>
+                         name="excerpt"
+                           id="excerpt"
+                           required
+                    >{{ old('excerpt') }}</textarea>
 
                     @error('excerpt')
                         <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
@@ -72,7 +74,7 @@
                                name="body"
                                id="body"
                                required
-                    ></textarea>
+                    >{{ old('body') }}</textarea>
 
                     @error('body')
                     <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
@@ -89,7 +91,10 @@
                     <select name="category_id" id="category_id" required>
 
                         @foreach (\App\Models\Category::all() as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option
+                                value="{{ $category->id }}"
+                                {{ old('excerpt') === $category->id ? 'selected' : '' }}
+                            >{{ $category->name }}</option>
                         @endforeach
 
                     </select>
