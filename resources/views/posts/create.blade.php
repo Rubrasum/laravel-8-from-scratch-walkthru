@@ -26,6 +26,25 @@
 
                 <div class="mb-6">
                     <label  class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                            for="slug"
+                    >
+                        Slug
+                    </label>
+
+                    <input  class="border border-gray-400 p-2 w-full"
+                               name="slug"
+                               id="slug"
+                               type="text"
+                               required
+                    />
+
+                    @error('slug')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-6">
+                    <label  class="block mb-2 uppercase font-bold text-xs text-gray-700"
                             for="excerpt"
                     >
                         Excerpt
@@ -62,23 +81,20 @@
 
                 <div class="mb-6">
                     <label  class="block mb-2 uppercase font-bold text-xs text-gray-700"
-                            for="category"
+                            for="category_id"
                     >
                         Category
                     </label>
 
-                    <select name="category" id="category" required>
-                        @php
-                            $categories = \App\Models\Category::all();
-                        @endphp
+                    <select name="category_id" id="category_id" required>
 
-                        @foreach ($categories as $category)
+                        @foreach (\App\Models\Category::all() as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
 
                     </select>
 
-                    @error('body')
+                    @error('category_id')
                     <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
                 </div>
