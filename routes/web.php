@@ -28,3 +28,26 @@ Route::get('admin/posts/create', [PostController::class,'create'])->middleware('
 Route::post('admin/posts', [PostController::class, 'store'])->middleware('admin');
 
 
+// #66
+//  dropdown for menu for adding post and going to dashboard
+//  turn create post page into a component for admin page
+//  adding a dashboard sidebar
+//  Adding login button to the same component form
+//  Also offscreened the register page
+
+// #67
+// Creating a form for editing and deleting posts
+// using old() with a default to make the edit page no different than the create
+// thumbnail field display
+// dont forget csrf
+// add hiddne PATCH input
+// also add post id for edit.
+
+// #68
+//  Creating a validation method for a model that works for Restful stuff.
+
+// #69
+// Authorization - use a Gate facade class in AppServiceProider to setup user()->can() and user()->cannot()
+// also @can directive
+// passing can through middleware
+// all AdminPostcontroller actions simplified route with except()
